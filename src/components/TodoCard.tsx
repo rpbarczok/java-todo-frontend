@@ -10,7 +10,7 @@ type TodoCardProps = {
 
 export default function TodoCard (props: TodoCardProps) {
     return (
-        <ListGroup.Item key={props.todo.id}>
+        <ListGroup.Item>
             <Row>
                 <Col>
                     {props.todo.description}

@@ -9,7 +9,7 @@ type OpenProps = {
 export default function Open (props: OpenProps) {
     return (
         <ListGroup>
-            {props.todosOpen.map(t => <TodoCard todo={t} setTodosChanged={props.setTodosChanged}/>)}
+            {props.todosOpen.map(t => <TodoCard key ={t.id} todo={t} setTodosChanged={props.setTodosChanged}/>)}
         </ListGroup>
     )
 }

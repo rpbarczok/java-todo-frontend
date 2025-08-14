@@ -9,7 +9,7 @@ type InProgressProps = {
 export default function InProgress (props: InProgressProps) {
     return (
         <ListGroup>
-            {props.todosInProgress.map(t => <TodoCard todo={t} setTodosChanged={props.setTodosChanged}/>)}
+            {props.todosInProgress.map(t => <TodoCard key ={t.id} todo={t} setTodosChanged={props.setTodosChanged}/>)}
         </ListGroup>
     )
 }

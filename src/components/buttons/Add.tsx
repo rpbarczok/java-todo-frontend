@@ -4,8 +4,8 @@ import {useState} from "react";
 import type {TodoDto} from "../../types/TodoDto.ts";
 import status from "../../data/status.ts";
 import type {Status} from "../../types/Status.ts";
-import axios from "axios";
 import {Plus} from "react-bootstrap-icons";
+import {createTodo} from "../../api/api.ts";
 
 
 type AddProps = {
@@ -43,16 +43,10 @@ export default function Add (props: AddProps) {
     }
 
     function submit() {
-        axios.post(
-            "/api/todo",
-            newTodo
-            )
-            .then(() => {
-                props.setTodosChanged(true)
-                setNewTodo({description: "", status: "OPEN"})
-                setShow(false)
-            })
-
+            createTodo(newTodo)
+            props.setTodosChanged(true)
+            setNewTodo({description: "", status: "OPEN"})
+            setShow(false)
     }
 
     return (

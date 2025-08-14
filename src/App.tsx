@@ -3,30 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from "./components/Header.tsx";
 import {Route, Routes} from "react-router-dom";
 import Overview from "./components/pages/Overview.tsx";
-import {useEffect, useState} from "react";
-import axios from "axios";
-import type {Todo} from "./types/Todo.ts";
 import Footer from "./components/Footer.tsx";
 import Navigation from "./components/Navigation.tsx";
 import InProgress from "./components/pages/InProgress.tsx";
 import Done from "./components/pages/Done.tsx";
 import Open from "./components/pages/Open.tsx";
 import {Container, Row} from "react-bootstrap";
+import {useTodo} from "./hooks/useTodo.ts";
 
 function App() {
 
-    const [todos, setTodos] = useState<Todo[]>([])
-    const [todosChanged, setTodosChanged] = useState<boolean>(true)
+    const [todos, setTodosChanged] = useTodo()
 
-    useEffect(()=> {
-        if (todosChanged) {
-            axios.get("/api/todo")
-                .then(result => setTodos(result.data) )
-            setTodosChanged(false)
-        }
-
-        }, [todosChanged]
-    )
 
     return (
         <Container fluid className='d-flex flex-column vh-100'>

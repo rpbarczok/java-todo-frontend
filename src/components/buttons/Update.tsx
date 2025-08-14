@@ -3,9 +3,9 @@ import {useState} from "react";
 
 import status from "../../data/status.ts";
 import type {Status} from "../../types/Status.ts";
-import axios from "axios";
 import type {Todo} from "../../types/Todo.ts";
 import {Pen} from "react-bootstrap-icons";
+import {updateTodo} from "../../api/api.ts";
 
 type AddProps = {
     setTodosChanged: (isChanged: boolean) => void
@@ -43,15 +43,9 @@ export default function Update (props: AddProps) {
     }
 
     function submit() {
-        axios.put(
-            "/api/todo/"+props.originalTodo.id,
-            updatedTodo
-        )
-            .then(result => {
-                props.setTodosChanged(true)
-                setUpdatedTodo(result.data)
-                setShow(false)
-            })
+        setUpdatedTodo(updateTodo(updatedTodo))
+        props.setTodosChanged(true)
+        setShow(false)
 
     }
 

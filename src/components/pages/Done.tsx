@@ -9,7 +9,7 @@ type DoneProps = {
 export default function Done (props: DoneProps) {
     return (
         <ListGroup>
-            {props.todosDone.map(t => <TodoCard todo={t} setTodosChanged={props.setTodosChanged}/>)}
+            {props.todosDone.map(t => <TodoCard key ={t.id} todo={t} setTodosChanged={props.setTodosChanged}/>)}
         </ListGroup>
     )
 }

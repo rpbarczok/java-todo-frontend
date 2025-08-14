@@ -1,7 +1,7 @@
 import type {Todo} from "../../types/Todo.ts";
 import {Button} from "react-bootstrap";
-import axios from "axios";
 import {Trash} from "react-bootstrap-icons";
+import {deleteTodo} from "../../api/api.ts";
 
 type DeleteProps = {
     setTodosChanged: (isChanged: boolean) => void
@@ -11,12 +11,8 @@ type DeleteProps = {
 export default function Delete(props: DeleteProps) {
 
     function handleDelete () {
-        axios.delete('/api/todo/'+props.todo.id)
-            .then(() => {
-                props.setTodosChanged(true)
-            }
-            )
-            .catch(error => console.log(error))
+        deleteTodo(props.todo.id)
+        props.setTodosChanged(true)
     }
 
     return (
