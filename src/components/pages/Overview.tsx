@@ -10,7 +10,7 @@ type OverviewProps = {
 export default function Overview (props: OverviewProps) {
     return (
         <>
-            <Row className="flex-shrink-1">
+            <Row>
                 <Col>
                     <h3>Open</h3>
                     <ListGroup>

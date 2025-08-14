@@ -33,7 +33,7 @@ function App() {
             <Row>
                 <Navigation />
             </Row>
-            <Row>
+            <Row className="header">
                 <Header setTodosChanged={setTodosChanged}/>
             </Row>
             <Row>
