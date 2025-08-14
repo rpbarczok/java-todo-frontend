@@ -4,12 +4,13 @@ import TodoCard from "../TodoCard.tsx";
 
 type InProgressProps = {
     todosInProgress: Todo[]
-    setTodosChanged: (isChanged: boolean) => void
+    handleUpdateTodo: (updatedTodo: Todo) => Promise<Todo>
+    handleDeleteTodo: (id: string) => Promise<void>
 }
 export default function InProgress (props: InProgressProps) {
     return (
         <ListGroup>
-            {props.todosInProgress.map(t => <TodoCard key ={t.id} todo={t} setTodosChanged={props.setTodosChanged}/>)}
+            {props.todosInProgress.map(t => <TodoCard key ={t.id} todo={t} handleUpdateTodo={props.handleUpdateTodo} handleDeleteTodo={props.handleDeleteTodo}/>)}
         </ListGroup>
     )
 }

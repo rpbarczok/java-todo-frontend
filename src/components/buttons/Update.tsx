@@ -5,14 +5,13 @@ import status from "../../data/status.ts";
 import type {Status} from "../../types/Status.ts";
 import type {Todo} from "../../types/Todo.ts";
 import {Pen} from "react-bootstrap-icons";
-import {updateTodo} from "../../api/api.ts";
 
-type AddProps = {
-    setTodosChanged: (isChanged: boolean) => void
+type UpdateProps = {
+    handleUpdateTodo: (updatedTodo: Todo) => Promise<Todo>
     originalTodo: Todo
 }
 
-export default function Update (props: AddProps) {
+export default function Update (props: UpdateProps) {
 
     const [show, setShow] = useState<boolean>(false)
     const [updatedTodo, setUpdatedTodo] = useState<Todo>(props.originalTodo)
@@ -42,9 +41,8 @@ export default function Update (props: AddProps) {
         )
     }
 
-    function submit() {
-        setUpdatedTodo(updateTodo(updatedTodo))
-        props.setTodosChanged(true)
+    async function submit() {
+        setUpdatedTodo(await props.handleUpdateTodo(updatedTodo))
         setShow(false)
 
     }
@@ -61,8 +59,8 @@ export default function Update (props: AddProps) {
                         <InputGroup.Text > Description</InputGroup.Text>
                         <Form.Control value={updatedTodo.description} onChange={(e) =>handleChangeDescription(e.target.value)}/>
                     </InputGroup>
-                    <Form.Select onChange={(e) => handleChangeStatus(e.target.value)}>
-                        {status.map(s => s === updatedTodo.status ? <option selected value={s}>{s}</option> : <option value={s}>{s}</option>)}
+                    <Form.Select defaultValue={updatedTodo.status} onChange={(e) => handleChangeStatus(e.target.value)}>
+                        {status.map(s => <option key={s} value={s}>{s}</option>)}
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer>

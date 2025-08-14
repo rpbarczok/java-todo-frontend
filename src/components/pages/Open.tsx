@@ -4,12 +4,13 @@ import TodoCard from "../TodoCard.tsx";
 
 type OpenProps = {
     todosOpen: Todo[]
-    setTodosChanged: (isChanged: boolean) => void
+    handleUpdateTodo: (updatedTodo: Todo) => Promise<Todo>
+    handleDeleteTodo: (id: string) => Promise<void>
 }
 export default function Open (props: OpenProps) {
     return (
         <ListGroup>
-            {props.todosOpen.map(t => <TodoCard key ={t.id} todo={t} setTodosChanged={props.setTodosChanged}/>)}
+            {props.todosOpen.map(t => <TodoCard key ={t.id} todo={t} handleUpdateTodo={props.handleUpdateTodo} handleDeleteTodo={props.handleDeleteTodo}/>)}
         </ListGroup>
     )
 }

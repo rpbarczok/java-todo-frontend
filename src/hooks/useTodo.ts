@@ -1,20 +1,45 @@
 import {useEffect, useState} from "react";
-import {fetchAllTodos} from "../api/api.ts";
+import {createTodo, deleteTodo, fetchAllTodos, updateTodo} from "../api/api.ts";
 import type {Todo} from "../types/Todo.ts";
+import type {TodoDto} from "../types/TodoDto.ts";
 
-export function useTodo (): [Todo[], (isChanged: boolean) => void] {
+export function useTodo (): [
+    Todo[],
+    (newTodo:TodoDto) => Promise<void>,
+    (updatedTodo:Todo) => Promise<Todo>,
+    (id:string) => Promise<void>
+] {
 
     const [todos, setTodos] = useState<Todo[]>([])
     const [todosChanged, setTodosChanged] = useState<boolean>(true)
 
     useEffect(()=> {
-            if (todosChanged) {
-                setTodos(fetchAllTodos())
-                setTodosChanged(false)
-            }
+        async function loadTodos () {
+            setTodos(await fetchAllTodos())
+            setTodosChanged(false)
+        }
+        if (todosChanged) {
+            void loadTodos()
+        }
 
         }, [todosChanged]
     )
 
-    return [todos, setTodosChanged]
+    async function handleCreateTodo(newTodo: TodoDto): Promise<void> {
+        void await createTodo(newTodo)
+        setTodosChanged(true)
+    }
+
+    async function handleUpdateTodo(updatedTodo: Todo): Promise<Todo> {
+        await updateTodo(updatedTodo)
+        setTodosChanged(true)
+        return updatedTodo
+    }
+
+    async function handleDeleteTodo(id: string): Promise<void> {
+        await deleteTodo(id)
+        setTodosChanged(true)
+    }
+
+    return [todos, handleCreateTodo, handleUpdateTodo, handleDeleteTodo]
 }

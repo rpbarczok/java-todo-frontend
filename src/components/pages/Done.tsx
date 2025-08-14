@@ -4,12 +4,13 @@ import TodoCard from "../TodoCard.tsx";
 
 type DoneProps = {
     todosDone: Todo[]
-    setTodosChanged: (isChanged: boolean) => void
+    handleUpdateTodo: (updatedTodo: Todo) => Promise<Todo>
+    handleDeleteTodo: (id: string) => Promise<void>
 }
 export default function Done (props: DoneProps) {
     return (
         <ListGroup>
-            {props.todosDone.map(t => <TodoCard key ={t.id} todo={t} setTodosChanged={props.setTodosChanged}/>)}
+            {props.todosDone.map(t => <TodoCard key ={t.id} todo={t} handleUpdateTodo={props.handleUpdateTodo} handleDeleteTodo={props.handleDeleteTodo}/>)}
         </ListGroup>
     )
 }

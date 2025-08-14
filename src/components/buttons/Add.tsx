@@ -5,11 +5,10 @@ import type {TodoDto} from "../../types/TodoDto.ts";
 import status from "../../data/status.ts";
 import type {Status} from "../../types/Status.ts";
 import {Plus} from "react-bootstrap-icons";
-import {createTodo} from "../../api/api.ts";
 
 
 type AddProps = {
-    setTodosChanged: (isChanged: boolean) => void
+    handleSubmitNewTodo: (newTodo: TodoDto) => Promise<void>
 }
 
 export default function Add (props: AddProps) {
@@ -43,8 +42,7 @@ export default function Add (props: AddProps) {
     }
 
     function submit() {
-            createTodo(newTodo)
-            props.setTodosChanged(true)
+            void props.handleSubmitNewTodo(newTodo)
             setNewTodo({description: "", status: "OPEN"})
             setShow(false)
     }
@@ -61,8 +59,8 @@ export default function Add (props: AddProps) {
                         <InputGroup.Text > Description</InputGroup.Text>
                         <Form.Control value={newTodo.description} onChange={(e) =>handleChangeDescription(e.target.value)}/>
                     </InputGroup>
-                    <Form.Select onChange={(e) => handleChangeStatus(e.target.value)}>
-                        {status.map(s => s === newTodo.status ? <option selected value={s}>{s}</option> : <option value={s}>{s}</option>)}
+                    <Form.Select key="status" defaultValue={newTodo.status} onChange={(e) => handleChangeStatus(e.target.value)}>
+                        {status.map(s => <option key={s} value={s}>{s}</option>)}
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer>

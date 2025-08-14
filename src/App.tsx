@@ -13,8 +13,7 @@ import {useTodo} from "./hooks/useTodo.ts";
 
 function App() {
 
-    const [todos, setTodosChanged] = useTodo()
-
+    const [todos, handleCreateTodo, handleUpdateTodo, handleDeleteTodo] = useTodo()
 
     return (
         <Container fluid className='d-flex flex-column vh-100'>
@@ -22,17 +21,17 @@ function App() {
                 <Navigation />
             </Row>
             <Row className="header">
-                <Header setTodosChanged={setTodosChanged}/>
+                <Header handleCreateTodo={handleCreateTodo}/>
             </Row>
             <Row>
 
             </Row>
             <Row className='flex-grow-1'>
                 <Routes >
-                    <Route path={"/"} element={<Overview todos={todos} setTodosChanged={setTodosChanged}/>} />
-                    <Route path={"/open"} element={<Open todosOpen={todos.filter(t => t.status === "OPEN")} setTodosChanged={setTodosChanged}/>} />
-                    <Route path={"/inprogress"} element={<InProgress todosInProgress={todos.filter(t => t.status === "IN_PROGRESS")} setTodosChanged={setTodosChanged}/>} />
-                    <Route path={"/done"} element={<Done todosDone={todos.filter(t => t.status === "DONE")} setTodosChanged={setTodosChanged}/>} />
+                    <Route path={"/overview"} element={<Overview todos={todos} handleUpdateTodo={handleUpdateTodo} handleDeleteTodo={handleDeleteTodo}/>} />
+                    <Route path={"/open"} element={<Open todosOpen={todos.filter((t) => t.status === "OPEN")} handleUpdateTodo={handleUpdateTodo} handleDeleteTodo={handleDeleteTodo}/>} />
+                    <Route path={"/inprogress"} element={<InProgress todosInProgress={todos.filter(t => t.status === "IN_PROGRESS")} handleUpdateTodo={handleUpdateTodo} handleDeleteTodo={handleDeleteTodo}/>} />
+                    <Route path={"/done"} element={<Done todosDone={todos.filter(t => t.status === "DONE")} handleUpdateTodo={handleUpdateTodo} handleDeleteTodo={handleDeleteTodo}/>} />
                 </Routes>
             </Row>
             <Row className='bg-body-secondary'>

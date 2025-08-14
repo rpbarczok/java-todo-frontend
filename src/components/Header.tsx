@@ -1,8 +1,9 @@
 import Add from "./buttons/Add.tsx";
 import {Col} from "react-bootstrap";
+import type {TodoDto} from "../types/TodoDto.ts";
 
 type HeaderProps = {
-    setTodosChanged: (isChanged: boolean) => void
+    handleCreateTodo: (newTodo: TodoDto) => void
 }
 export default function Header (props: HeaderProps) {
     return (
@@ -11,7 +12,7 @@ export default function Header (props: HeaderProps) {
                 <h1>What to do?</h1>
             </Col>
             <Col xs="auto" className="align-content-center">
-                <Add setTodosChanged={props.setTodosChanged}/>
+                <Add handleSubmitNewTodo={props.handleCreateTodo}/>
             </Col>
         </>
 

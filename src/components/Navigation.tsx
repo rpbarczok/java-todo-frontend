@@ -9,7 +9,7 @@ export default function Navigation () {
     return (
             <Navbar className='bg-body-secondary'>
                 <Nav>
-                    <Nav.Link onClick={() => nav("/")}>Overview</Nav.Link>
+                    <Nav.Link onClick={() => nav("/overview")}>Overview</Nav.Link>
                     <Nav.Link onClick={() => nav("/open")}>Open</Nav.Link>
                     <Nav.Link onClick={() => nav("/inprogress")}>In Progress</Nav.Link>
                     <Nav.Link onClick={() => nav("/done")}>Done</Nav.Link>
