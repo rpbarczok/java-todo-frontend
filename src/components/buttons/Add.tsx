@@ -8,7 +8,7 @@ import {Plus} from "react-bootstrap-icons";
 
 
 type AddProps = {
-    handleSubmitNewTodo: (newTodo: TodoDto) => Promise<void>
+    handleCreateTodo: (newTodo: TodoDto) => Promise<void>
 }
 
 export default function Add (props: AddProps) {
@@ -42,7 +42,7 @@ export default function Add (props: AddProps) {
     }
 
     function submit() {
-            void props.handleSubmitNewTodo(newTodo)
+            void props.handleCreateTodo(newTodo)
             setNewTodo({description: "", status: "OPEN"})
             setShow(false)
     }
