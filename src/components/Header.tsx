@@ -1,8 +1,19 @@
-export default function Header () {
+import Add from "./buttons/Add.tsx";
+import {Col, Row} from "react-bootstrap";
+
+type HeaderProps = {
+    setTodosChanged: (isChanged: boolean) => void
+}
+export default function Header (props: HeaderProps) {
     return (
-        <div className="header">
-            <h1>What to do?</h1>
-        </div>
+        <Row className="header">
+            <Col>
+                <h1>What to do?</h1>
+            </Col>
+            <Col className="align-content-center">
+                <Add setTodosChanged={props.setTodosChanged}/>
+            </Col>
+        </Row>
 
     )
 }

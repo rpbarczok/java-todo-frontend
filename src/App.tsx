@@ -34,7 +34,7 @@ function App() {
                 <Navigation />
             </Row>
             <Row>
-                <Header/>
+                <Header setTodosChanged={setTodosChanged}/>
             </Row>
             <Row>
 
